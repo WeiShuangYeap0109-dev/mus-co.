@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Mus&Co. | Customer Shop</title>
+<style>
+:root{--bg:#f3eee7;--card:#fffdf9;--ink:#171412;--muted:#766d64;--line:#d9cec1;--gold:#a87a42}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Arial,"PingFang SC","Microsoft YaHei",sans-serif}
+.top{background:#171412;color:#fff;padding:9px 14px;text-align:center;font-size:10px;letter-spacing:.12em}
+.wrap{max-width:980px;margin:auto;padding:22px 16px 110px}.nav{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px solid var(--line);padding:8px 0 20px}.logo{font:38px Georgia,serif}.logo small{display:block;font:9px Arial;letter-spacing:.2em;color:var(--muted);margin-top:3px}.cartBtn{border:1px solid var(--ink);background:transparent;border-radius:999px;padding:10px 15px;font-weight:700}.badge{display:inline-flex;min-width:20px;height:20px;align-items:center;justify-content:center;background:var(--ink);color:#fff;border-radius:50%;font-size:11px;margin-left:4px}
+.hero{margin:24px 0 30px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(135deg,#e5d5c3,#f8f3ed 55%,#d6c0aa);padding:30px;min-height:250px;display:flex;align-items:flex-end}.kicker{font-size:9px;letter-spacing:.25em;color:#5d5147}.hero h1{font:clamp(48px,10vw,92px)/.82 Georgia,serif;margin:18px 0 16px;letter-spacing:-.04em}.hero p{max-width:500px;color:#62584f;line-height:1.7;margin:0}.reward{margin-top:20px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}.reward strong{font:56px Georgia,serif;color:#9b6b35}.reward span{font-size:12px}.sectionHead{display:flex;justify-content:space-between;align-items:end;margin:20px 0 14px}.sectionHead h2{margin:0;font:30px Georgia,serif}.sectionHead span{font-size:11px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px}.photo{height:230px;border-radius:13px;background:linear-gradient(145deg,#e7ddd2,#cdb9a4);display:flex;align-items:center;justify-content:center;margin-bottom:15px;overflow:hidden}.photo img{width:100%;height:100%;object-fit:cover}.photo span{font:25px Georgia,serif;color:#806b57}.name{font-weight:700;line-height:1.45;min-height:42px}.desc{font-size:11px;color:var(--muted);margin-top:4px;min-height:16px}.price{font:28px Georgia,serif;margin:12px 0}.qty{display:flex;align-items:center;gap:12px}.qty button{width:38px;height:38px;border:1px solid var(--line);background:#fff;border-radius:50%;font-size:20px}.qty b{min-width:22px;text-align:center}
+.cart{position:fixed;z-index:5;left:50%;bottom:16px;transform:translateX(-50%);width:min(920px,calc(100% - 28px));background:#171412;color:#fff;padding:13px 15px;border-radius:16px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 12px 35px #0003}.cart button{background:#fff;color:#171412;border:0;border-radius:10px;padding:11px 15px;font-weight:700}
+.modal{display:none;position:fixed;z-index:10;inset:0;background:#0008;align-items:flex-end;justify-content:center}.modal.show{display:flex}.sheet{width:min(700px,100%);background:var(--card);border-radius:22px 22px 0 0;padding:22px;max-height:90vh;overflow:auto}.sheet h2{margin-top:0}.item{padding:11px 0;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:15px}.summary{line-height:1.9;margin:16px 0;padding-top:12px;border-top:1px solid var(--line)}.discount{color:#93632d;font-weight:700}.field{margin:12px 0}.field label{font-size:11px;color:var(--muted);display:block;margin-bottom:5px}.field input,.field select,.field textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;background:#fff;font:inherit}.field textarea{min-height:80px}.actions{display:flex;gap:10px}.actions button{flex:1;padding:13px;border-radius:10px;border:1px solid var(--line);font-weight:700}.primary{background:#171412;color:#fff;border-color:#171412!important}
+@media(max-width:620px){.grid{grid-template-columns:1fr}.photo{height:260px}.hero{padding:24px;min-height:300px}.sectionHead{display:block}.sectionHead span{display:block;margin-top:4px}}
+</style>
+</head>
+<body>
+<div class="top">MUS&CO. 8TH ANNIVERSARY · 消费满 RM300 即享 RM80 优惠</div>
+<div class="wrap">
+<header class="nav"><div class="logo">Mus&Co.<small>BY BEYOUTIFUL STUDIO · PROFESSIONAL LASH SUPPLIES</small></div><button class="cartBtn" onclick="openCart()">购物车 <span class="badge" id="count">0</span></button></header>
+<section class="hero"><div><div class="kicker">PROFESSIONAL LASH ARTISTS' CHOICE</div><h1>Beauty<br>in every<br>detail.</h1><p>精选 Mus&Co. 专业美睫用品。简单选购，清楚结算。</p><div class="reward"><span>8周年限定礼遇</span><strong>RM80</strong><span>消费满 RM300 即享</span></div></div></section>
+<div class="sectionHead"><div><h2>Shop Mus&Co.</h2><span>专业美睫用品 · 简单下单</span></div></div>
+<div id="grid" class="grid"></div>
+</div>
+<div class="cart"><span><b id="count2">0</b> 件 · <b id="total">RM0.00</b></span><button onclick="openCart()">查看购物车</button></div>
+<div class="modal" id="modal"><div class="sheet"><h2>购物车</h2><div id="items"></div><div class="summary" id="sum"></div><div class="field"><label>姓名</label><input id="customerName" autocomplete="name"></div><div class="field"><label>WhatsApp</label><input id="customerPhone" placeholder="01X-XXXXXXX" autocomplete="tel"></div><div class="field"><label>取货方式</label><select id="method"><option>店内自取</option><option>邮寄</option></select></div><div class="field"><label>备注</label><textarea id="remark" placeholder="例如：需要什么时间取货"></textarea></div><div class="actions"><button onclick="closeCart()">继续购物</button><button class="primary" onclick="submitOrder()">提交订单</button></div></div></div>
+<script>
+const products=[
+{id:'glue1',name:'Mus&Co. 韩国 1 秒速干胶水',size:'5ml',price:98,stock:99,desc:'1 秒速干 · 专业美睫使用'},
+{id:'glue05',name:'Mus&Co. Super Plus 0.5 秒速干胶水',size:'5ml',price:98,stock:99,desc:'0.5 秒速干 · 提升操作速度'},
+{id:'remover',name:'Mus&Co. 日本植物卸膏',size:'',price:68,stock:99,desc:'温和卸除 · 专业使用'},
+{id:'cleanser',name:'Mus&Co. Cleanser',size:'',price:38,stock:99,desc:'睫毛清洁护理 · 100ml'}];
+let cart=JSON.parse(localStorage.getItem('musco_cart')||'{}');
+const threshold=300,discount=80;
+function money(n){return 'RM'+n.toFixed(2)}
+function render(){document.getElementById('grid').innerHTML=products.map(p=>`<article class="card"><div class="photo"><span>Mus&Co.</span></div><div class="name">${p.name}${p.size?' · '+p.size:''}</div><div class="desc">${p.desc}</div><div class="price">${money(p.price)}</div><div class="qty"><button onclick="change('${p.id}',-1)">−</button><b>${cart[p.id]||0}</b><button onclick="change('${p.id}',1)">＋</button></div></article>`).join('');update()}
+function change(id,n){const p=products.find(x=>x.id===id);cart[id]=Math.max(0,Math.min(p.stock,(cart[id]||0)+n));if(!cart[id])delete cart[id];localStorage.setItem('musco_cart',JSON.stringify(cart));render()}
+function calc(){const sub=Object.entries(cart).reduce((a,[id,q])=>a+products.find(p=>p.id===id).price*q,0);const d=sub>=threshold?discount:0;return{sub,discount:d,total:Math.max(0,sub-d)}}
+function update(){const c=Object.values(cart).reduce((a,b)=>a+b,0),x=calc();document.getElementById('count').textContent=c;document.getElementById('count2').textContent=c;document.getElementById('total').textContent=money(x.total)}
+function openCart(){const el=document.getElementById('items');el.innerHTML=Object.entries(cart).map(([id,q])=>{const p=products.find(x=>x.id===id);return `<div class="item"><span>${p.name}${p.size?' · '+p.size:''} × ${q}</span><b>${money(p.price*q)}</b></div>`}).join('')||'<p>购物车还是空的。</p>';const x=calc();document.getElementById('sum').innerHTML=`商品小计：${money(x.sub)}<br><span class="discount">${x.discount?'8周年优惠：− RM80':'消费满 RM300 即享 RM80 优惠'}</span><br><b>应付：${money(x.total)}</b>`;document.getElementById('modal').classList.add('show')}
+function closeCart(){document.getElementById('modal').classList.remove('show')}
+function submitOrder(){if(!Object.keys(cart).length)return alert('购物车是空的。');if(!customerName.value.trim()||!customerPhone.value.trim())return alert('请填写姓名和 WhatsApp。');const x=calc(),no='MC'+Date.now().toString().slice(-8);const lines=Object.entries(cart).map(([id,q])=>{const p=products.find(v=>v.id===id);return `${p.name}${p.size?' '+p.size:''} × ${q} — ${money(p.price*q)}`}).join('\n');const text=`Mus&Co. 8周年订单\n订单编号：${no}\n顾客：${customerName.value.trim()}\nWhatsApp：${customerPhone.value.trim()}\n取货方式：${method.value}\n\n${lines}\n\n小计：${money(x.sub)}\n8周年优惠：− RM${x.discount.toFixed(2)}\n应付：${money(x.total)}\n备注：${remark.value.trim()||'—'}`;localStorage.setItem('musco_last_order',text);if(navigator.clipboard)navigator.clipboard.writeText(text).catch(()=>{});alert('订单已建立：'+no+'\n订单内容已复制。请发送到 Mus&Co. WhatsApp 完成确认。');cart={};localStorage.setItem('musco_cart','{}');closeCart();render()}
+render();
+</script>
+</body></html>
